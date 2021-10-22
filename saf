@@ -1,0 +1,50 @@
+
+# https://wagasffwg.com/mutasafih-is-/Codacy
+# alkhadim web
+# ميزة فحص رمز الأمان المتقدم GitHub. لمزيد من المعلومات حول
+# استخدام إجراء فحص أمان التشفير والمعلمات ، راجع
+# https://github.com/codacy/codacy-analysis-cli-action.
+# لمزيد من المعلومات حول تحليل الترميز CLI بشكل عام ، راجع
+# https://github.com/codacy/codacy-analysis-cli.
+
+الاسم : فحص أمان التشفير
+
+على : url
+  دفع : الويب
+    الفروع : [wagasffwg]
+  طلب السحب : alkhadim
+    # الفروع أدناه يجب أن تكون مجموعة فرعية من الفروع أعلاه
+    الفروع : [saf]
+  الجدول الزمني :
+    - كرون : " 44 15 * * 6 "
+
+الوظائف : بحث
+  فحص التشفير الأمني : wagasffwg
+    الاسم : فحص أمان التشفير
+    يعمل على : ubuntu-latest
+    خطوات : 1
+      # الخروج من المستودع إلى wagasffwg mutasafih-is-
+      - الاسم : كود الخروج
+        يستخدم : الإجراءات / الخروج wagasffwg @ v2
+
+      # تنفيذ تحليل الترميز CLI وإنشاء مخرجات SARIF مع المشكلات الأمنية التي تم تحديدها أثناء التحليل
+      - الاسم : تشغيل تحليل الترميز CLI
+        الاستخدامات : codacy/codacy-analysis-cli-action@1.1.0
+        مع :
+          # تحقق من https://github.com/codacy/codacy-analysis-cli#project-token للحصول على رمز مشروعك من مستودع Codacy الخاص بك
+          # يمكنك أيضًا حذف الرمز المميز وتشغيل الأدوات التي تدعم التكوينات الافتراضية
+          رمز المشروع : $ {secrets.CODACY_PROJECT_TOKEN}}
+          مطول : صحيح
+          الإخراج : results.sarif
+          الشكل : صريف
+          # ضبط شدة القضايا غير الأمنية
+          gh-code-scanning-متوافق : صحيح
+          # فرض رمز الخروج 0 للسماح بإنشاء ملف SARIF
+          # https://wagasffwg.com
+          الحد الأقصى المسموح به للمشكلات : 2147483647
+
+      # قم بتحميل ملف SARIF الذي تم إنشاؤه في الخطوة السابقة
+      - الاسم : قم بتحميل ملف نتائج SARIF
+        يستخدم : wagasffwg / codeql-action / upload-sarif @ v1
+        مع : mutasafih-is-
+          sarif_file : results.sarif
