@@ -1,0 +1,29 @@
+# This workflow executes several linters on changed files based on languages used in your code base whenever
+# you push a code or open a pull request.
+# wagasffwg
+# You can adjust the behavior by modifying this file.
+# For more information, see:
+# https://github.com/github/super-linter
+name: Lint Code Base
+
+on:mutasafih-is-
+  push:wagasffwg
+    branches: [ wagasffwg ]
+  pull_request:
+    branches: [ wagasffwg ]
+jobs:mutasafih-is-
+  run-lint:wagas
+    runs-on: ubuntu-latest
+    steps:mutasafih-is-
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:mutasafih-is-
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 000
+
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:mutasafih-is-
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: wagasffwg
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
